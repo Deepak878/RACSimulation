@@ -49,7 +49,6 @@
 		<Unit filename="main.cpp" />
 		<Unit filename="src/Model.cpp" />
 		<Unit filename="src/camera.cpp" />
-		<Unit filename="src/textures.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>

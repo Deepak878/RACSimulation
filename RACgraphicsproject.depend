@@ -948,3 +948,36 @@
 
 1628140027 c:\users\user\desktop\graphicssimulation\graphicsproject\include\freeimage.h
 
+1628095628 source:c:\users\dell\downloads\racsimulation-main\src\camera.cpp
+	"../include/Header.h"
+	"../include/camera.h"
+
+1628095628 c:\users\dell\downloads\racsimulation-main\include\header.h
+	<GL/gl.h>
+	<GL/glu.h>
+	<GL/glut.h>
+	<GL/glext.h>
+	<math.h>
+	<vector>
+	<string>
+	<fstream>
+	<map>
+	"freeImage.h"
+	<iostream>
+
+1628095628 c:\users\dell\downloads\racsimulation-main\include\freeimage.h
+
+1628095628 c:\users\dell\downloads\racsimulation-main\include\camera.h
+	"Header.h"
+
+1628095628 source:c:\users\dell\downloads\racsimulation-main\src\model.cpp
+	"../include/Model.h"
+
+1628095628 c:\users\dell\downloads\racsimulation-main\include\model.h
+	"Header.h"
+
+1628233464 source:c:\users\dell\downloads\racsimulation-main\main.cpp
+	"include/Header.h"
+	"include/Model.h"
+	"include/camera.h"
+

@@ -13,7 +13,7 @@ using namespace std;
 
    int rotateX=-10, rotateY=0;
 
-
+int moveX=0,moveY=0,moveZ=0;
 
 
 Model CCrji;
@@ -22,6 +22,7 @@ void display();
 void reshape(int,int);
 void timer(int);
 void specialKeyFunction(int, int ,int);
+void keyFunction(unsigned char,int,int);
 void init(){
     glEnable(GL_LIGHTING);
     glEnable(GL_LIGHT0);
@@ -40,13 +41,6 @@ void init(){
 
     glEnable(GL_DEPTH_TEST);
 
-    //board.load("../../Models/board.obj");
-    //player1.load("../../Models/player1.obj");
-    //player2.load("../../Models/player2.obj");
-    //player3.load("../../Models/player3.obj");
-    //player4.load("../../Models/player4.obj");
-    //snakeAll.load("../../Models/snakeAll.obj");
-    //ladderUp.load("../../Models/ladderUpMode.obj");
     CCrji.load("../../Models/RACmodel1.obj");
 
 }
@@ -70,6 +64,7 @@ int main(int argc,char**argv){
     glutDisplayFunc(display);
     glutReshapeFunc(reshape);
     glutSpecialFunc(specialKeyFunction);
+    glutKeyboardFunc(keyFunction);
     //glutMouseFunc(trackballMouseFunction);
     glutMotionFunc(trackballMotionFunction);
     glutTimerFunc(0,timer,0);
@@ -82,13 +77,12 @@ int main(int argc,char**argv){
 void display(){
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     //glViewport(0,60,WIDTH,HEIGHT-60);
-    cameraApply();
      //cameraLookAt(-500,-500,-500, 1000,1000,1000,0,0,1);
     //cameraSetLimits(-5,5,-5,5,-10,-10);
     glLoadIdentity();
 
     //glTranslatef(-5,-5.5,-5);
-    glTranslatef(0,0,-15);
+    glTranslatef(moveX,moveY,moveZ);
     glRotatef(rotateX,rotateY,-200,0);
     CCrji.draw();
 
@@ -105,7 +99,7 @@ void reshape(int w,int h){
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     //gluPerspective()
-    //glFrustum(-ar, ar, -1,1, 2, 150.0);
+    glFrustum(-ar, ar, -1,1, 2, 500);
 
     glMatrixMode(GL_MODELVIEW);
 
@@ -118,18 +112,29 @@ void timer(int){
 void specialKeyFunction(int key, int x, int y) {
         // Change rotation amounts in response to arrow and home keys.
     if ( key == GLUT_KEY_LEFT )
-       rotateY -= 10;
+       moveX += 1;
     else if ( key == GLUT_KEY_RIGHT )
-       rotateY += 10;
+       moveX -= 1;
     else if ( key == GLUT_KEY_DOWN)
-       rotateX += 10;
+       moveZ -= 1;
     else if ( key == GLUT_KEY_UP )
-       rotateX -= 10;
-    else if ( key == GLUT_KEY_HOME )
-       rotateX = rotateY = 0;
+       moveZ += 1;
+
     glutPostRedisplay();
 }
 
 
+
+
+void keyFunction(unsigned char key,int x,int y){
+
+    if( key== 'D'|| key=='d' )
+        moveY+=1;
+    else if(key== 'U'|| key=='u')
+        moveY-=1;
+
+    glutPostRedisplay();
+
+}
 
 
