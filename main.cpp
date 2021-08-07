@@ -1,15 +1,10 @@
 #include"include/Header.h"
 #include"include/Model.h"
 #include"include/camera.h"
-#include <GL/gl.h>
 #define WIDTH 1280
 #define HEIGHT 720
 #define INTERVAL 15
 GLuint texture;
-//#include "../Library/MicrosoftTeams-image (30).png"
-//#include "../Library/MicrosoftTeams-image (32).png"
-//#include "../Library/MicrosoftTeams-image (28).png"
-
 
 using namespace std;
 
@@ -28,7 +23,7 @@ void specialKeyFunction(int, int ,int);
 void keyFunction(unsigned char,int,int);
 GLuint LoadTexture( const char *);
 void init(){
-    texture=LoadTexture("tiles.bmp");
+//    texture=LoadTexture("tiles.bmp");
     glEnable(GL_LIGHTING);
     glEnable(GL_LIGHT0);
     //GLfloat light_pos[]={-1,10,100,1};
@@ -38,7 +33,6 @@ void init(){
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
     glEnable(GL_LINE_SMOOTH);
-    glBindTexture(GL_TEXTURE_2D, texture);
     glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_REPEAT);
     glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_REPEAT);
     glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
@@ -61,8 +55,6 @@ int main(int argc,char**argv){
     //glutSetOption(GLUT_MULTISAMPLE,8);
     int POS_X=(glutGet(GLUT_SCREEN_WIDTH)-WIDTH)>>1;
     int POS_Y=(glutGet(GLUT_SCREEN_HEIGHT)-HEIGHT)>>1;
-
-
     glutInitWindowPosition(POS_X,POS_Y);
     glutInitWindowSize(WIDTH,HEIGHT);
     glutCreateWindow("Animation");
@@ -80,12 +72,17 @@ int main(int argc,char**argv){
 }
 
 void display(){
+      texture=LoadTexture("../../tiles.bmp");
+  glGenTextures(1, &texture);
+    glEnable(GL_TEXTURE_2D);
+//  glBindTexture( GL_TEXTURE_2D, texture);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
 
     //glTranslatef(-5,-5.5,-5);
     glTranslatef(moveX,moveY,moveZ);
     glRotatef(rotateX,rotateY,-200,0);
+    glBindTexture(GL_TEXTURE_2D, texture);
     CCrji.draw();
 
 
@@ -124,9 +121,6 @@ void specialKeyFunction(int key, int x, int y) {
 
     glutPostRedisplay();
 }
-
-
-
 
 void keyFunction(unsigned char key,int x,int y){
 
