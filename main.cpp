@@ -1,9 +1,11 @@
 #include"include/Header.h"
 #include"include/Model.h"
 #include"include/camera.h"
+#include <GL/gl.h>
 #define WIDTH 1280
 #define HEIGHT 720
 #define INTERVAL 15
+GLuint texture;
 //#include "../Library/MicrosoftTeams-image (30).png"
 //#include "../Library/MicrosoftTeams-image (32).png"
 //#include "../Library/MicrosoftTeams-image (28).png"
@@ -11,7 +13,8 @@
 
 using namespace std;
 
-   int rotateX=-10, rotateY=0;
+
+int rotateX=-10, rotateY=0;
 
 int moveX=0,moveY=0,moveZ=0;
 
@@ -23,15 +26,19 @@ void reshape(int,int);
 void timer(int);
 void specialKeyFunction(int, int ,int);
 void keyFunction(unsigned char,int,int);
+GLuint LoadTexture( const char *);
 void init(){
+    texture=LoadTexture("tiles.bmp");
     glEnable(GL_LIGHTING);
     glEnable(GL_LIGHT0);
-    GLfloat light_pos[]={-1,10,100,1};
+    //GLfloat light_pos[]={-1,10,100,1};
+    GLfloat light_pos[]={14.685,1.9495,24.678,1};
     glLightfv(GL_LIGHT0,GL_POSITION,light_pos);
     float white[4]={1,1,1,1};
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
     glEnable(GL_LINE_SMOOTH);
+    glBindTexture(GL_TEXTURE_2D, texture);
     glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_REPEAT);
     glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_REPEAT);
     glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
@@ -46,8 +53,6 @@ void init(){
 }
 
 int main(int argc,char**argv){
-
-
     glutInit(&argc,argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH |GLUT_MULTISAMPLE);
 
@@ -65,8 +70,8 @@ int main(int argc,char**argv){
     glutReshapeFunc(reshape);
     glutSpecialFunc(specialKeyFunction);
     glutKeyboardFunc(keyFunction);
-    //glutMouseFunc(trackballMouseFunction);
-    glutMotionFunc(trackballMotionFunction);
+    glutMouseFunc(trackballMouseFunction);
+//   glutMotionFunc(trackballMotionFunction);
     glutTimerFunc(0,timer,0);
     init();
 
@@ -76,9 +81,6 @@ int main(int argc,char**argv){
 
 void display(){
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    //glViewport(0,60,WIDTH,HEIGHT-60);
-     //cameraLookAt(-500,-500,-500, 1000,1000,1000,0,0,1);
-    //cameraSetLimits(-5,5,-5,5,-10,-10);
     glLoadIdentity();
 
     //glTranslatef(-5,-5.5,-5);
@@ -136,5 +138,82 @@ void keyFunction(unsigned char key,int x,int y){
     glutPostRedisplay();
 
 }
+
+void trackballMouseFunction(int button, int buttonState, int x, int y) {
+if(button==GLUT_LEFT_BUTTON)
+{
+    if (buttonState==GLUT_UP)
+    {
+//        moveX+=10;
+if(x<750){
+       rotateX+=20;
+}
+else
+{
+    rotateX-=20;
+}
+    }
+    else
+    {
+        if(x<0 && y<0)
+        {
+//        moveX-=10;
+        rotateX+=10;
+        }
+        else
+        {
+//            moveX+=10;
+            rotateX-=10;
+        }
+
+    }
+glutPostRedisplay();
+}
+
+}
+
+GLuint LoadTexture( const char * filename )
+{
+  GLuint texture;
+  int width, height;
+  unsigned char * data;
+
+  FILE * file;
+  file = fopen( filename, "rb" );
+
+  if ( file == NULL ) return 0;
+  width = 1024;
+  height = 512;
+  data = (unsigned char *)malloc( width * height * 3 );
+  //int size = fseek(file,);
+  fread( data, width * height * 3, 1, file );
+  fclose( file );
+
+  for(int i = 0; i < width * height ; ++i)
+  {
+    int index = i*3;
+    unsigned char B,R;
+    B = data[index];
+    R = data[index+2];
+
+    data[index] = R;
+    data[index+2] = B;
+  }
+
+  glGenTextures( 1, &texture );
+  glBindTexture( GL_TEXTURE_2D, texture );
+  glTexEnvf( GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE,GL_MODULATE );
+  glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER,GL_LINEAR_MIPMAP_NEAREST );
+
+  glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER,GL_LINEAR );
+  glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S,GL_REPEAT );
+  glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T,GL_REPEAT );
+  gluBuild2DMipmaps( GL_TEXTURE_2D, 3, width, height,GL_RGB, GL_UNSIGNED_BYTE, data );
+  free( data );
+
+  return texture;
+}
+
+
 
 

@@ -195,27 +195,22 @@
       glutPostRedisplay();
    }
 
-    void trackballMouseFunction(int button, int buttonState, int x, int y) {
-        if (button == GLUT_LEFT_BUTTON && buttonState == GLUT_DOWN)
-  {
-     //store the x,y value where the click happened
-     cout<<x<<y<<endl;
-  }
-       if (buttonState == GLUT_DOWN && button==GLUT_LEFT_BUTTON) {
-                cout<<"inside called"<<endl;
-       // a mouse button was pressed
-           if (dragging)
-              return;  // ignore a second button press during a draw operation
-           dragging = 1;  // Might not want to do this in all cases
-           dragButton = button;
-           mousePointToRay(x,y,prevRay);
-       }
-       else {  // a mouse button was released
-           if ( ! dragging || button != dragButton )
-               return; // this mouse release does not end a drag operation
-           dragging = 0;
-       }
-   }
+//    void trackballMouseFunction(int button, int buttonState, int x, int y) {
+//       if (buttonState == GLUT_DOWN && button == GLUT_LEFT_BUTTON) {
+//                cout<<"inside called"<<endl;
+//       // a mouse button was pressed
+//           if (dragging)
+//              return;  // ignore a second button press during a draw operation
+//           dragging = 1;  // Might not want to do this in all cases
+//           dragButton = button;
+//           mousePointToRay(x,y,prevRay);
+//       }
+//       else {  // a mouse button was released
+//           if ( ! dragging || button != dragButton )
+//               return; // this mouse release does not end a drag operation
+//           dragging = 0;
+//       }
+//   }
 
 
 
