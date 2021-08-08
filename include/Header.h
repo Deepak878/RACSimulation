@@ -1,8 +1,6 @@
 
 #ifndef HEADER_H_INCLUDED
 #define HEADER_H_INCLUDED
-
-
 #include<GL/gl.h>
 #include<GL/glu.h>
 #include<GL/glut.h>
@@ -12,7 +10,6 @@
 #include<string>
 #include<fstream>
 #include<map>
-#include"freeImage.h"
 
 using namespace std;
 

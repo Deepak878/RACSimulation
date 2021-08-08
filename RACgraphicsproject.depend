@@ -915,16 +915,15 @@
 1526093416 c:\program files\codeblocks\mingw\x86_64-w64-mingw32\include\math.h
 	<crtdefs.h>
 
-1628095628 source:c:\users\user\desktop\graphicssimulation\graphicsproject\src\model.cpp
+1628407879 source:c:\users\user\desktop\graphicssimulation\graphicsproject\src\model.cpp
 	"../include/Model.h"
 
-1628325557 source:c:\users\user\desktop\graphicssimulation\graphicsproject\main.cpp
+1628407988 source:c:\users\user\desktop\graphicssimulation\graphicsproject\main.cpp
 	"include/Header.h"
 	"include/Model.h"
 	"include/camera.h"
-	<GL/gl.h>
 
-1628095628 c:\users\user\desktop\graphicssimulation\graphicsproject\include\header.h
+1628406676 c:\users\user\desktop\graphicssimulation\graphicsproject\include\header.h
 	<GL/gl.h>
 	<GL/glu.h>
 	<GL/glut.h>
@@ -934,17 +933,15 @@
 	<string>
 	<fstream>
 	<map>
-	"freeImage.h"
 	<iostream>
 
 1628095628 c:\users\user\desktop\graphicssimulation\graphicsproject\include\model.h
 	"Header.h"
 
-1628095628 c:\users\user\desktop\graphicssimulation\graphicsproject\include\camera.h
+1628407972 c:\users\user\desktop\graphicssimulation\graphicsproject\include\camera.h
 	"Header.h"
 
-1628312536 source:c:\users\user\desktop\graphicssimulation\graphicsproject\src\camera.cpp
-	"../include/Header.h"
+1628407990 source:c:\users\user\desktop\graphicssimulation\graphicsproject\src\camera.cpp
 	"../include/camera.h"
 
 1628095628 c:\users\user\desktop\graphicssimulation\graphicsproject\include\freeimage.h
